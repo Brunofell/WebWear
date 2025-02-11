@@ -2,6 +2,7 @@ package com.example.WebWear.controller;
 
 import com.example.WebWear.dto.user.UserGetData;
 import com.example.WebWear.dto.user.UserRegisterData;
+import com.example.WebWear.dto.user.UserUpdateData;
 import com.example.WebWear.entity.User;
 import com.example.WebWear.services.UserService;
 import jakarta.validation.Valid;
@@ -25,6 +26,11 @@ public class UserController {
     @GetMapping("/get")
     public List<UserGetData> get_user(){
         return service.get_user();
+    }
+
+    @PutMapping("/update")
+    public void update_user(@RequestBody @Valid UserUpdateData data){
+        service.update_user(data);
     }
 
     @DeleteMapping("/{id}")

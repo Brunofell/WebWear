@@ -1,6 +1,7 @@
 package com.example.WebWear.entity;
 
 import com.example.WebWear.dto.user.UserRegisterData;
+import com.example.WebWear.dto.user.UserUpdateData;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -101,4 +102,41 @@ public class User {
     public void setActive(boolean active) {
         this.active = active;
     }
+
+    public void update(UserUpdateData data) {
+        if(data.name() != null){
+            this.name= data.name();
+        }
+        if(data.email() != null){
+            this.email = data.email();
+        }
+        if(data.password() != null){
+            this.password = data.password();
+        }
+        if(data.postalCode() != null){
+            this.postalCode = data.postalCode();
+        }
+        if(data.phone_number() != null){
+            this.phone_number = data.phone_number();
+        }
+        if(data.date() != null){
+            this.date = data.date();
+        }
+    }
+
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

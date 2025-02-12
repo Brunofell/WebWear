@@ -1,20 +1,17 @@
 package com.example.WebWear.services;
 
+import com.example.WebWear.dto.product.ProductGetData;
 import com.example.WebWear.dto.product.ProductRegisterData;
-import com.example.WebWear.dto.user.UserGetData;
-import com.example.WebWear.dto.user.UserRegisterData;
-import com.example.WebWear.dto.user.UserUpdateData;
+import com.example.WebWear.dto.product.ProductUpdateData;
 import com.example.WebWear.entity.Product;
-import com.example.WebWear.entity.User;
 import com.example.WebWear.repository.ProductRepository;
-import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestBody;
 
 import java.util.List;
 
+@Service
 public class ProductService {
 
     @Autowired
@@ -22,8 +19,26 @@ public class ProductService {
 
     @Transactional
     public void post_product(ProductRegisterData data){
-        Product product = new Product();
+        Product product = new Product(data);
         productRepository.save(product);
     }
+
+    @Transactional
+    public List<ProductGetData> getProduct(){
+        return  productRepository.findAll().stream().map(ProductGetData::new).toList();
+    }
+
+    @Transactional
+    public void update_product(ProductUpdateData data){
+        var product = productRepository.getReferenceById(data.id());
+        product.update(data);
+    }
+
+    @Transactional
+    public void delete_product(Long id){
+        productRepository.deleteById(id);
+    }
+
+
 
 }

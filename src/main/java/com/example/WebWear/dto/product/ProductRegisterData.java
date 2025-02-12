@@ -6,10 +6,10 @@ public record ProductRegisterData(
         @NotBlank
         String name,
         @NotBlank
-        double description,
+        String description,
         @NotBlank
-        int stock,
+        Integer stock,
         @NotBlank
-        int categorie
+        String category
 ) {
 }

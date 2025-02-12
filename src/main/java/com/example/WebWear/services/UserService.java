@@ -5,13 +5,9 @@ import com.example.WebWear.dto.user.UserRegisterData;
 import com.example.WebWear.dto.user.UserUpdateData;
 import com.example.WebWear.entity.User;
 import com.example.WebWear.repository.UserRepository;
-import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestBody;
-
 import java.util.List;
 
 
@@ -33,17 +29,15 @@ public class UserService {
     }
 
     @Transactional
-    public void update_user(@RequestBody @Valid UserUpdateData data){
+    public void update_user(UserUpdateData data){
         var user = userRepository.getReferenceById(data.id());
         user.update(data);
     }
 
     @Transactional
-    public void delete_user(@PathVariable Long id){
+    public void delete_user(Long id){
         var user = userRepository.getReferenceById(id);
         user.delete();
     }
-
-
 
 }

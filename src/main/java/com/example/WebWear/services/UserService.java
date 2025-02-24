@@ -6,6 +6,9 @@ import com.example.WebWear.dto.user.UserUpdateData;
 import com.example.WebWear.entity.User;
 import com.example.WebWear.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import java.util.List;
@@ -27,6 +30,14 @@ public class UserService {
     public List<UserGetData> get_user(){
         return userRepository.findAllByActiveTrue().stream().map(UserGetData::new).toList();
     }
+
+    // Paginação??
+    @Transactional
+    public Page<User> getUser(int pageNo, int pageSize){
+        Pageable pageable = PageRequest.of(pageNo, pageSize);
+        return userRepository.findAll(pageable);
+    }
+
 
     @Transactional
     public void update_user(UserUpdateData data){

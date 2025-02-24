@@ -5,9 +5,9 @@ import com.example.WebWear.entity.Product;
 public record ProductGetData(
         Long id,
         String name,
-        double description,
+        String description,
         int stock,
-        int category
+        String category
 ) {
     public ProductGetData(Product product){
         this(product.getId(), product.getName(), product.getDescription(), product.getStock(), product.getCategory());
